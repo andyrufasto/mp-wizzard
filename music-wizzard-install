@@ -1,0 +1,40 @@
+#!/bin/sh
+
+## Installing dependencies ## ueberzug sacad
+
+dependencies=("mpd" "mpc" "ncmpcpp")
+
+check_dep()
+{
+ command -v $1 && echo "[✓ ] $1" || instala $1
+}
+
+instala()
+{
+command -v pacman && sudo pacman -S $1 || sudo apt intall $1
+}
+
+for i in "${dependencies[@]}"
+do
+	check_dep "$i"
+done
+
+## CONFIG ##
+
+[ -z "$XDG_CONFIG_HOME" ] && echo 'export XDG_CONFIG_HOME="$HOME/.config"' >> $HOME/.profile
+
+# MPD
+
+[ -f ~/.config/mpd ] && mv ~/.config/mpd ~/.config/mpd.old
+
+echo "Generating mpd config"
+mkdir -p ~/.config/mpd
+cp -R src/mpd/ ~/.config/ -v
+
+# NCMPCPP
+
+[ -z ~/.config/ncmpcpp ] && mv ~/.config/ncmpcpp ~/.config/ncmpcpp.old
+
+echo "Generating mpd config"
+mkdir -p ~/.config/ncmpcpp
+cp -R src/mcmpcpp/ ~/.config/ -v
