@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ## Installing dependencies ## ueberzug sacad
 
@@ -11,7 +11,7 @@ check_dep()
 
 instala()
 {
-command -v pacman && sudo pacman -S $1 || sudo apt intall $1
+command -v pacman && sudo pacman -S $1 || sudo apt install $1
 }
 
 for i in "${dependencies[@]}"
@@ -37,4 +37,4 @@ cp -R src/mpd/ ~/.config/ -v
 
 echo "Generating mpd config"
 mkdir -p ~/.config/ncmpcpp
-cp -R src/mcmpcpp/ ~/.config/ -v
+cp -R src/ncmpcpp/ ~/.config/ -v
