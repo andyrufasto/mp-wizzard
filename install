@@ -2,7 +2,7 @@
 
 ## DEPENDENCIES
 
-dependencies=("mpd" "mpc" "ncmpcpp")
+dependencies=("mpd" "mpc" "pulseaudio" "ncmpcpp")
 
 check_dep()
 {
@@ -54,5 +54,7 @@ cp -R src/ncmpcpp/ ~/.config/ -v
 ## MAKING EXECUTABLE ##
 
 chmod +x ~/.config/ncmpcpp/ncmpcpp-ueberzug
-chmod +x ~/.config/ncmpcpp/ncmpcpp_cover_art
+chmod +x ~/.config/ncmpcpp/ncmpcpp_cover_art.sh
 ln ~/.config/ncmpcpp/ncmpcpp-ueberzug ~/.local/bin/mpw
+
+cp src/music/"Darude - Sandstorm.mp3" ~/Music/
