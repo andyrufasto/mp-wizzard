@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Installing dependencies ## ueberzug sacad
+## DEPENDENCIES
 
 dependencies=("mpd" "mpc" "ncmpcpp")
 
@@ -17,6 +17,18 @@ command -v pacman && sudo pacman -S $1 || sudo apt install $1
 for i in "${dependencies[@]}"
 do
 	check_dep "$i"
+done
+
+## PYTHON DEPENDENCIES ##
+
+command -v pip3 || sudo pacman -S python-pip || sudo apt install python3-pip 
+
+py_dep=("setuptools" "ueberzug")
+
+
+for i in "${py_dep[@]}"
+do
+	sudo pip3 install "$i"
 done
 
 ## CONFIG ##
@@ -38,3 +50,9 @@ cp -R src/mpd/ ~/.config/ -v
 echo "Generating mpd config"
 mkdir -p ~/.config/ncmpcpp
 cp -R src/ncmpcpp/ ~/.config/ -v
+
+## MAKING EXECUTABLE ##
+
+chmod +x ~/.config/ncmpcpp/ncmpcpp-ueberzug
+chmod +x ~/.config/ncmpcpp/ncmpcpp_cover_art
+ln ~/.config/ncmpcpp/ncmpcpp-ueberzug ~/.local/bin/mpw
