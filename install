@@ -2,7 +2,7 @@
 
 ## DEPENDENCIES
 
-dependencies=("mpd" "mpc" "pulseaudio" "ncmpcpp")
+dependencies=("mpd" "mpc" "pulseaudio" "ncmpcpp" "mpDris2")
 
 check_dep()
 {

@@ -3,9 +3,9 @@
 
 # SETTINGS
 music_library="$HOME/Music"
-fallback_image="$HOME/.config/ncmpcpp/fallback.png"
-padding_top=0
-padding_bottom=4
+fallback_image="$HOME/.config/ncmpcpp/ncmpcpp-ueberzug/img/fallback.png"
+padding_top=2
+padding_bottom=3
 padding_right=0
 max_width=30
 reserved_playlist_cols=0
@@ -25,6 +25,7 @@ font_width=
 main() {
     kill_previous_instances >/dev/null 2>&1
     find_cover_image        >/dev/null 2>&1
+    notify_song        			&
     display_cover_image     2>/dev/null
     detect_window_resizes   >/dev/null 2>&1
 }
@@ -73,9 +74,16 @@ find_cover_image() {
     fi
 }
 
+notify_song(){
+	title_notify=$(mpc -f %title% current)
+	artist_notify=$(mpc -f %artist% current)
+	dunstctl close
+	notify-send "  $title_notify" -i "$cover_path" "$artist_notify"
+}
+
+
 display_cover_image() {
     compute_geometry
-
     send_to_ueberzug \
         action "add" \
         identifier "mpd_cover" \
@@ -244,3 +252,5 @@ send_to_ueberzug() {
 
 
 main
+
+
